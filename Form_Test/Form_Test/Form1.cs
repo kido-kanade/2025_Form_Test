@@ -29,23 +29,25 @@ namespace Form_Test
 
 
                     //ボタンの大きさを設定
-                    Testbutton.Size = new Size(200, 100);
+                    Testbutton.Size = new Size(50, 50);
 
                     //ボタン内のテキスト設定
-                    Testbutton.Text = "あいうえお";
+                    Testbutton.Text = "クリック";
+
+                    //Click eventにhogehogeClick関数を登録
+                    Testbutton.Click += hogehogeClick;
 
                     //コントロールボタンを追加
                     Controls.Add(Testbutton);
                 }
             }
-          
-            {
-
-            }
 
         }
-
-
+        //自分で作成することも可能
+        private void hogehogeClick(object sender, EventArgs e)
+        {
+            MessageBox.Show("クリック");
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             MessageBox.Show("C#の世界へようこそ！");

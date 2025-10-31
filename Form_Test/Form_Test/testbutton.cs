@@ -48,10 +48,8 @@ namespace Form_Test
 
              private void ClickEvent(object sender, EventArgs e)
         {
-            SetEnable(!_enable);
+            SetEnable(!_enable);//クリックしたら切り替わるようになる
         }
     }
-
-
 }
 

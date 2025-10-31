@@ -17,22 +17,13 @@ namespace Form_Test
         {
             InitializeComponent();
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int j = 0; j < 3; j++)
                 {
+
                     //インスタンス生成
-                    testbutton Testbutton = new testbutton();
-
-                    //ボタンの位置設定
-                    Testbutton.Location = new Point(50 * i, 50*j);
-
-
-                    //ボタンの大きさを設定
-                    Testbutton.Size = new Size(50, 50);
-
-                    //ボタン内のテキスト設定
-                    Testbutton.Text = "クリック";
+                    testbutton Testbutton = new testbutton(new Point (50*i,50*j),new Size(50,50),"あ");
 
                     //Click eventにhogehogeClick関数を登録
                     Testbutton.Click += hogehogeClick;

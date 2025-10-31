@@ -10,6 +10,26 @@ namespace Form_Test
 {
     internal class testbutton : Button
     {
+        //ボタンの色設定
+        private Color _onColor=Color.LightBlue;//ONの時の色
+        private Color _offColor = Color.DarkBlue;//OFFの時の色
+
+        private bool _enable;
+        public void SetEnable(bool on)
+        {
+            _enable= on;
+            if (on)
+            {
+                BackColor = _onColor;
+            }
+            else
+            {
+                BackColor= _offColor;
+            }
+                
+        }
+
+
         public testbutton(Point position, Size size, string text)
       {
         //ボタンの位置設定
@@ -19,6 +39,8 @@ namespace Form_Test
         //ボタン内のテキスト設定
         Text=text;
 
+        SetEnable(false);
+
         Click+=ClickEvent;
        }
 
@@ -26,7 +48,7 @@ namespace Form_Test
 
              private void ClickEvent(object sender, EventArgs e)
         {
-            MessageBox.Show("Testbutton内で設定");
+            SetEnable(!_enable);
         }
     }
 

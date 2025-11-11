@@ -12,10 +12,12 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Form_Test
 {
+    
     public partial class Form1 : Form
     {
-        //constをつけると初期化時のみ変更が可能になる
-        const int BUTTON_SIZE_X = 100;//ボタンの横
+        
+            //constをつけると初期化時のみ変更が可能になる
+            const int BUTTON_SIZE_X = 100;//ボタンの横
         const int BUTTON_SIZE_Y = 100;//ボタンの縦
 
         const int BOARD_SIZE_X = 3;//ボタンが横に何個並ぶか
@@ -50,21 +52,20 @@ namespace Form_Test
                     Controls.Add(Testbutton);
                 }
             }
+            testbutton.RandomizeBoard(this, BOARD_SIZE_X, BOARD_SIZE_Y, 10);//Randomizeboardで初期盤面を作る
 
             _buttonArray[1, 0].SetEnable(true);
         }
             public testbutton GetTestButton(int x, int y)
-        
-            
             {
                 //配列外参照対策
                 if (x < 0 || x >= BOARD_SIZE_X) return null;
                 if (y < 0 || y >= BOARD_SIZE_Y) return null;
            
                 return _buttonArray[y, x];
-            }
-      
-        
+
+        }
+
         //自動生成
         private void button1_Click(object sender, EventArgs e)
         {

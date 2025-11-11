@@ -23,8 +23,7 @@ namespace Form_Test
 
         private int _y;
 
-
-
+        public static Random _random = new Random();//これで乱数生成
         public testbutton(Form1 form1, int x, int y, Size size, string text)
         {
 
@@ -55,12 +54,12 @@ namespace Form_Test
             {
                 BackColor = _offColor;
             }
-
+           
         }
 
         public void Toggle()
         {
-            SetEnable(!_enable);
+            SetEnable(!_enable);//ON OFF反転
         }
 
         private void ClickEvent(object sender, EventArgs e)
@@ -83,9 +82,32 @@ namespace Form_Test
                     button.Toggle();
 
                 }
+           
+            }
+
+            if (IsAllSame())
+            {
+                MessageBox.Show("クリアしました！");
             }
         }
-        private int[][] _toggleData =
+        //全部同じ色か判定
+        private bool IsAllSame()
+        {
+            bool first = _form1.GetTestButton(0, 0)._enable;//左上のボタンがONかOFFか記録
+
+            for (int y = 0; y < 3; y++) //3*3のすべてのボタンを確認
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    if (_form1.GetTestButton(x, y)._enable != first)
+                        return false;//クリアしてないならfalseを返す
+                }
+            }
+            return true;//全部同じならクリアでtrueを返す
+        }
+
+
+        private int[][] _toggleData =//どのボタンを反転するか
         {
             new int[]{0,0},
             new int[]{1, 0 },
@@ -93,6 +115,39 @@ namespace Form_Test
             new int[]{0, 1},
             new int[]{0, -1},
         };
+        public static void RandomizeBoard(Form1 form, int width, int height, int moves = 5)//ランダムにボタンを5回押した状態から
+        {
+            //全てOFFに
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    form.GetTestButton(x, y).SetEnable(false);
+                }
+            }
+
+            // 何回かクリックしたことにする
+            for (int i = 0; i < moves; i++)
+            {
+                int randomx = _random.Next(width);//Nextでランダムな位置を選ぶ
+                int randomy = _random.Next(height);
+                testbutton button = form.GetTestButton(randomx, randomy);
+                if (button != null)
+                {
+                    // 押した時と同じ処理
+                    foreach (var data in button._toggleData)
+                    {
+                        testbutton button2 = form.GetTestButton(randomx + data[0], randomy + data[1]);
+                        button2?.Toggle();
+                    }
+                }
+
+            }
+        }
+
+
+
+
     }
 }
 
